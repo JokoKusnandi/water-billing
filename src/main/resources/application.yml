@@ -1,0 +1,40 @@
+server:
+  port: 9080
+
+spring:
+  application:
+      name: waterbilling
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=water_billing
+    username: postgres
+    password: G0C0d1ng2023
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: water_billing
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  kafka:
+    bootstrap-servers: localhost:9092
+  data:
+    redis:
+      host: localhost
+      port: 6372
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.springframework.web: info
+
+springdoc:
+  swagger-ui:
+    path: /swagger
